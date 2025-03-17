@@ -8,12 +8,17 @@ import { useRef, useState } from 'react';
 import { AnimatedListItem } from './AnimatedListItem';
 import { motion } from 'framer-motion'
 import confetti from "canvas-confetti";
+import { toast } from 'sonner';
+import { PasoCard } from './PasoCard';
+import { Conclusion } from './Conclusion';
 
 type Lanzamiento = Array<{ name: string, description: string }>
 
 export const AmountThrow = () => {
   const [amount, setAmount] = useState("1")
   const [error, setError] = useState("")
+  const [margenError, setMargenError] = useState("")
+  const [totalLanzamientos, setTotalLanzamientos] = useState({ cara: 0, sello: 0 })
   const [lanzamientos, setLanzamientos] = useState<Lanzamiento>([])
   const audioRef = useRef<HTMLAudioElement>(null);
 
@@ -73,12 +78,18 @@ export const AmountThrow = () => {
       name: Math.random() < 0.5 ? "Cara" : "Sello",
       description: `Lanz. #${(i + 1).toString().padStart(3, "0")}`,
     }));
-    
+    const totalCara = resultados.filter((item) => item.name === "Cara").length;
+    const totalSello = resultados.filter((item) => item.name === "Sello").length;
+    const margenError = (Math.abs((1.5 - parseFloat((((totalCara * 1) + (totalSello * 2)) / Number(amount)).toFixed(2))) / 1.5) * 100).toFixed(1)
+
     setLanzamientos(resultados);
+    setTotalLanzamientos({ cara: totalCara, sello: totalSello });
+    setMargenError(margenError);
     handleConfetti();
     setTimeout(() => { handleConfetti(); }, 500);
     setTimeout(() => { handleConfetti(); }, 1000);
 
+    toast.success("Lanzamientos realizados exitosamente.");
     if (audioRef.current) audioRef.current.play();
   }
 
@@ -90,7 +101,7 @@ export const AmountThrow = () => {
           type="number" 
           id="amount" 
           placeholder="Cantidad" 
-          className='py-5' 
+          className='py-5 dark:bg-[#151515] bg-white' 
           value={amount}
           onChange={handleChange}
         />
@@ -119,7 +130,7 @@ export const AmountThrow = () => {
             lanzamientos.length === 0 
             ? (
                 <div className='w-full flex items-center justify-center h-64'>
-                  <span className='italic text-xl font-semibold z-40 font-orbitron'>No hay lanzamientos aún</span>
+                  <span className='italic text-xl font-semibold z-40 font-orbitron text-center'>No hay lanzamientos aún</span>
                 </div>
               )
             : (
@@ -130,6 +141,70 @@ export const AmountThrow = () => {
           }
         </div>
       </Container>
+
+      {
+        lanzamientos.length !== 0 && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-28 relative overflow-visible py-5 px-6 md:max-w-4xl w-full">
+              <PasoCard 
+                index={0}
+                title="Paso N°8" 
+                description="Cantidades totales"
+                math={`Cara = ${totalLanzamientos.cara} \\quad Sello = ${totalLanzamientos.sello}`}
+              />
+              <PasoCard 
+                index={22}
+                title="Paso N°9" 
+                description="Encontrar el valor obtenido"
+                math={`
+                  \\begin{aligned}
+                    U_0 &= \\frac{${totalLanzamientos.cara}(1) + ${totalLanzamientos.sello}(2)}{${amount}} = \\frac{${(totalLanzamientos.cara * 1) + (totalLanzamientos.sello * 2)}}{${amount}} \\\\
+                    U_0 &= ${(((totalLanzamientos.cara * 1) + (totalLanzamientos.sello * 2)) / Number(amount)).toFixed(2)}
+                  \\end{aligned}
+                `}
+              />
+              <PasoCard 
+                index={32}
+                title="Paso N°9" 
+                description="Encontrar el valor obtenido"
+                math={`
+                  \\begin{aligned}
+                    U_0 &= \\frac{${totalLanzamientos.cara}(1) + ${totalLanzamientos.sello}(2)}{${amount}} \\\\
+                    U_0 &= \\frac{${(totalLanzamientos.cara * 1) + (totalLanzamientos.sello * 2)}}{${amount}} \\\\
+                    U_0 &= ${(((totalLanzamientos.cara * 1) + (totalLanzamientos.sello * 2)) / Number(amount)).toFixed(2)}
+                  \\end{aligned}
+                `}
+              />
+              <PasoCard
+                index={30}
+                title="Paso N°10"
+                description="Encontrar el margen de error"
+                math={`
+                  \\varepsilon = \\left| \\frac{1.5 - ${(((totalLanzamientos.cara * 1) + (totalLanzamientos.sello * 2)) / Number(amount)).toFixed(2)}}{1.5} \\right| \\times 100\\% = ${margenError}\\%
+                `}
+              />
+              <PasoCard
+                index={40}
+                title="Paso N°10"
+                description="Encontrar el margen de error"
+                math={`
+                  \\varepsilon = \\left| \\frac{1.5 - ${(((totalLanzamientos.cara * 1) + (totalLanzamientos.sello * 2)) / Number(amount)).toFixed(2)}}{1.5} \\right| \\times 100\\% \\\\
+                  \\varepsilon = ${margenError}\\%
+                `}
+              />
+            </div>
+            
+            <Conclusion 
+              text1={`De este experimento donde se lanzó ${amount} veces una moneda, obtuvimos los siguientes resultados:`}
+              math={`
+                Cara = ${totalLanzamientos.cara} \\\\ 
+                Sello = ${totalLanzamientos.sello}
+              `}
+              text2={`Donde el margen de error ${parseFloat(margenError) <= 5 && "no"} superó el 5%. Su resultado fue del ${margenError}% de tal manera que, esto demuestra que el proyecto es ${parseFloat(margenError) <= 5 ? "válido" : "inválido"} con un margen de error ${parseFloat(margenError) <= 5 ? "bajo" : "alto"}.`}
+            />
+          </>
+        ) 
+      }
     </div>
   )
 }

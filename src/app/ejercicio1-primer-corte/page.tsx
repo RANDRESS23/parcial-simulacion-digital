@@ -2,10 +2,14 @@ import { PasoCard } from "@/components/PasoCard";
 import Container from "@/components/Container";
 import { Spotlight } from "@/components/ui/spotlight";
 import { AmountThrow } from "@/components/AmountThrow";
+import { GridPattern } from "@/components/magicui/grid-pattern";
+import { cn } from "@/lib/utils";
+import { Meteors } from "@/components/ui/meteors";
+import { Footer } from "@/components/Footer";
 
 export default function Ejercicio1() {
   return (
-    <main className="w-full relative flex justify-center items-center flex-col mx-auto sm:px-10 px-5">
+    <main className="w-full relative flex justify-center items-center flex-col mx-auto sm:px-10 px-5 overflow-hidden">
       <div className="w-full h-full relative z-40">
         <Spotlight className="-top-80 -left-10 md:-left-96 h-screen hidden lg:flex" fill="white" />
       </div>
@@ -30,16 +34,28 @@ export default function Ejercicio1() {
               math="\cap : \{ \text{Cara}, \text{Sello} \}"
             />
             <PasoCard 
-              index={1}
+              index={22}
               title="Paso N°2" 
               description="Discriminar eventos"
               math="A = \{ \text{Cara} \} \quad B = \{ \text{Sello} \}"
             />
+            <PasoCard 
+              index={32}
+              title="Paso N°2" 
+              description="Discriminar eventos"
+              math="A = \{ \text{Cara} \} \\ B = \{ \text{Sello} \}"
+            />
             <PasoCard
-              index={2}
+              index={22}
               title="Paso N°3"
               description="Encontrar la probabilidad de cada evento"
               math="P(A) = \frac{1}{2} = 0.5 \quad P(B) = \frac{1}{2} = 0.5"
+            />
+            <PasoCard
+              index={32}
+              title="Paso N°3"
+              description="Encontrar la probabilidad de cada evento"
+              math="P(A) = \frac{1}{2} = 0.5 \\ P(B) = \frac{1}{2} = 0.5"
             />
             <PasoCard
               index={3}
@@ -82,7 +98,18 @@ export default function Ejercicio1() {
       
       <section className="-my-8 px-4 md:px-6 lg:px-8 relative w-full max-w-7xl mx-auto">
         <div className="flex flex-col items-center justify-center max-w-4xl mx-auto mb-12">
-          <Container>
+          <Container className="relative">
+            <GridPattern
+              width={30}
+              height={30}
+              x={-1}
+              y={-1}
+              strokeDasharray={"4 2"}
+              className={cn(
+                "[mask-image:radial-gradient(300px_circle_at_center,white,transparent)]",
+                "h-[250%] w-[100%] -z-50"
+              )}
+            />
             <div className="flex flex-col items-center text-center max-w-2xl mx-auto">
               <h2 className="text-2xl md:text-4xl font-heading font-bold mt-6">
                 Paso N°7 - Lanzamientos
@@ -96,6 +123,8 @@ export default function Ejercicio1() {
 
         <AmountThrow />
       </section>
+      <Meteors number={15} />
+      <Footer />
     </main>
   )
 }

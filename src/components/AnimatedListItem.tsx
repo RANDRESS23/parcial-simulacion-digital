@@ -14,7 +14,7 @@ export const AnimatedListItem = ({ name, description }: Item) => {
     <motion.figure
       initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
       className={cn(
-        "relative min-h-fit w-[130px] overflow-hidden rounded-2xl p-2",
+        "relative min-h-fit w-[120px] lg:w-[130px] overflow-hidden rounded-2xl p-2",
         // animation styles
         "transition-all duration-200 ease-in-out hover:scale-[103%]",
         // light styles
