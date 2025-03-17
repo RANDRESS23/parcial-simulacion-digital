@@ -129,7 +129,7 @@ export const AmountThrow = () => {
           {
             lanzamientos.length === 0 
             ? (
-                <div className='w-full flex items-center justify-center h-64'>
+                <div className='w-full flex items-center justify-center h-64 mb-20'>
                   <span className='italic text-xl font-semibold z-40 font-orbitron text-center'>No hay lanzamientos aún</span>
                 </div>
               )
