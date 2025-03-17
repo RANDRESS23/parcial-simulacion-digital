@@ -119,7 +119,7 @@ export const AmountThrow = () => {
         <audio ref={audioRef} src="/sounds/coin-drop.mp3" />
       </Container>
 
-      <Container>
+      <Container className={lanzamientos.length === 0 ? "mb-20" : "mb-5"}>
         <div className="flex flex-col w-full mx-auto mb-5">
           <h2 className="text-xl md:text-2xl font-heading font-bold mt-6 font-orbitron">
             Lanzamientos:
@@ -129,7 +129,7 @@ export const AmountThrow = () => {
           {
             lanzamientos.length === 0 
             ? (
-                <div className='w-full flex items-center justify-center h-64 mb-20'>
+                <div className='w-full flex items-center justify-center h-64'>
                   <span className='italic text-xl font-semibold z-40 font-orbitron text-center'>No hay lanzamientos aún</span>
                 </div>
               )
