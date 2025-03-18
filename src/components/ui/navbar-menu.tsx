@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
 
 const transition = {

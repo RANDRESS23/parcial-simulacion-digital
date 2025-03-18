@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { HoveredLink, Menu, MenuItem } from "./ui/navbar-menu";
 import { cn } from "@/lib/utils";
 import { ThemeSwitch } from "./ThemeSwitch";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { Home } from "./icons/Home";
 import { MobileMenu } from "./MobileMenu";
 
