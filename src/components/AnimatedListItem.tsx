@@ -1,7 +1,6 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import { motion } from 'framer-motion'
 
 interface Item {
   name: string;
@@ -11,8 +10,7 @@ interface Item {
 
 export const AnimatedListItem = ({ name, description, Icon }: Item) => {
   return (
-    <motion.figure
-      initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
+    <figure
       className={cn(
         "relative min-h-fit w-[120px] lg:w-[130px] overflow-hidden rounded-2xl p-2",
         // animation styles
@@ -38,6 +36,6 @@ export const AnimatedListItem = ({ name, description, Icon }: Item) => {
           </p>
         </div>
       </div>
-    </motion.figure>
+    </figure>
   );
 };

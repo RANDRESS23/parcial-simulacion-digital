@@ -19,7 +19,6 @@ export const PasoCard = ({ index, title, description, math }: CardProps) => {
 
   return (
     <Container
-      delay={0.1 + index * 0.1}
       className={cn(
         'relative flex flex-col rounded-2xl transition-colors',
         index === 1 && 'lg:col-span-2',

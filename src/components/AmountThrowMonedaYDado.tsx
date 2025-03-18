@@ -21,6 +21,8 @@ export const AmountThrowMonedaYDado = () => {
   const [margenError, setMargenError] = useState("")
   const [totalLanzamientos, setTotalLanzamientos] = useState({ c1_c: 0, c1_s: 0, c2_c: 0, c2_s: 0, c3_c: 0, c3_s: 0, c4_c: 0, c4_s: 0, c5_c: 0, c5_s: 0, c6_c: 0, c6_s: 0 })
   const [lanzamientos, setLanzamientos] = useState<Lanzamiento>([])
+  const [showAll, setShowAll] = useState(false);
+  const visibleLanzamientos = showAll ? lanzamientos : lanzamientos.slice(0, 36);
   const audioRef = useRef<HTMLAudioElement>(null);
   const audioRef2 = useRef<HTMLAudioElement>(null);
 
@@ -98,6 +100,7 @@ console.log({margenError});
     setLanzamientos(resultados);
     setTotalLanzamientos({ c1_c: conteo["C1 - C"] || 0, c1_s: conteo["C1 - S"] || 0, c2_c: conteo["C2 - C"] || 0, c2_s: conteo["C2 - S"] || 0, c3_c: conteo["C3 - C"] || 0, c3_s: conteo["C3 - S"] || 0, c4_c: conteo["C4 - C"] || 0, c4_s: conteo["C4 - S"] || 0, c5_c: conteo["C5 - C"] || 0, c5_s: conteo["C5 - S"] || 0, c6_c: conteo["C6 - C"] || 0, c6_s: conteo["C6 - S"] || 0 });
     setMargenError(margenError);
+    setShowAll(false);
     handleConfetti("💰");
     setTimeout(() => { handleConfetti("🎲"); }, 500);
     setTimeout(() => { handleConfetti("💰"); }, 1000);
@@ -149,14 +152,28 @@ console.log({margenError});
                 </div>
               )
             : (
-                lanzamientos.map((item, idx) => (
-                  <AnimatedListItem 
-                    key={idx} 
-                    name={item.name} 
-                    description={item.description} 
-                    Icon={FaDice} 
-                  />
-                ))
+                <>
+                  {visibleLanzamientos.map((item, idx) => (
+                    <AnimatedListItem 
+                      key={idx} 
+                      name={item.name} 
+                      description={item.description} 
+                      Icon={FaDice} 
+                    />
+                  ))}
+                  
+                  {/* Botón para ver todos los lanzamientos */}
+                  {!showAll && lanzamientos.length > 36 && (
+                    <motion.button
+                    className="mx-auto flex items-center justify-center mt-5 mb-2 text-foreground hover:underline transition-all cursor-pointer"
+                      onClick={() => setShowAll(true)}
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      Ver todos los lanzamientos ↓
+                    </motion.button>
+                  )}
+                </>
               )
           }
         </div>

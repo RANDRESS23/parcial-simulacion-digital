@@ -21,6 +21,8 @@ export const AmountThrowDado = () => {
   const [margenError, setMargenError] = useState("")
   const [totalLanzamientos, setTotalLanzamientos] = useState({ cara1: 0, cara2: 0, cara3: 0, cara4: 0, cara5: 0, cara6: 0 })
   const [lanzamientos, setLanzamientos] = useState<Lanzamiento>([])
+  const [showAll, setShowAll] = useState(false);
+  const visibleLanzamientos = showAll ? lanzamientos : lanzamientos.slice(0, 36);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +92,7 @@ export const AmountThrowDado = () => {
     setLanzamientos(resultados);
     setTotalLanzamientos({ cara1: conteoCaras["Cara 1"] || 0, cara2: conteoCaras["Cara 2"] || 0, cara3: conteoCaras["Cara 3"] || 0, cara4: conteoCaras["Cara 4"] || 0, cara5: conteoCaras["Cara 5"] || 0, cara6: conteoCaras["Cara 6"] || 0 });
     setMargenError(margenError);
+    setShowAll(false);
     handleConfetti();
     setTimeout(() => { handleConfetti(); }, 500);
     setTimeout(() => { handleConfetti(); }, 1000);
@@ -139,14 +142,28 @@ export const AmountThrowDado = () => {
                 </div>
               )
             : (
-                lanzamientos.map((item, idx) => (
-                  <AnimatedListItem 
-                    key={idx} 
-                    name={item.name} 
-                    description={item.description} 
-                    Icon={item.name === "Cara 1" ? GiDiceSixFacesOne : item.name === "Cara 2" ? GiDiceSixFacesTwo : item.name === "Cara 3" ? GiDiceSixFacesThree : item.name === "Cara 4" ? GiDiceSixFacesFour : item.name === "Cara 5" ? GiDiceSixFacesFive : GiDiceSixFacesSix} 
-                  />
-                ))
+                <>
+                  {visibleLanzamientos.map((item, idx) => (
+                    <AnimatedListItem 
+                      key={idx} 
+                      name={item.name} 
+                      description={item.description} 
+                      Icon={item.name === "Cara 1" ? GiDiceSixFacesOne : item.name === "Cara 2" ? GiDiceSixFacesTwo : item.name === "Cara 3" ? GiDiceSixFacesThree : item.name === "Cara 4" ? GiDiceSixFacesFour : item.name === "Cara 5" ? GiDiceSixFacesFive : GiDiceSixFacesSix} 
+                    />
+                  ))}
+                  
+                  {/* Botón para ver todos los lanzamientos */}
+                  {!showAll && lanzamientos.length > 36 && (
+                    <motion.button
+                    className="mx-auto flex items-center justify-center mt-5 mb-2 text-foreground hover:underline transition-all cursor-pointer"
+                      onClick={() => setShowAll(true)}
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      Ver todos los lanzamientos ↓
+                    </motion.button>
+                  )}
+                </>
               )
           }
         </div>

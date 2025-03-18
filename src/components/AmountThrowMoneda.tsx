@@ -21,6 +21,8 @@ export const AmountThrowMoneda = () => {
   const [margenError, setMargenError] = useState("")
   const [totalLanzamientos, setTotalLanzamientos] = useState({ cara: 0, sello: 0 })
   const [lanzamientos, setLanzamientos] = useState<Lanzamiento>([])
+  const [showAll, setShowAll] = useState(false);
+  const visibleLanzamientos = showAll ? lanzamientos : lanzamientos.slice(0, 36);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +88,7 @@ export const AmountThrowMoneda = () => {
     setLanzamientos(resultados);
     setTotalLanzamientos({ cara: totalCara, sello: totalSello });
     setMargenError(margenError);
+    setShowAll(false);
     handleConfetti();
     setTimeout(() => { handleConfetti(); }, 500);
     setTimeout(() => { handleConfetti(); }, 1000);
@@ -135,14 +138,28 @@ export const AmountThrowMoneda = () => {
                 </div>
               )
             : (
-                lanzamientos.map((item, idx) => (
-                  <AnimatedListItem 
-                    name={item.name} 
-                    description={item.description} 
-                    key={idx}
-                    Icon={item.name === "Cara" ? RiCoinFill : RiCoinLine} 
-                  />
-                ))
+                <>
+                  {visibleLanzamientos.map((item, idx) => (
+                    <AnimatedListItem 
+                      name={item.name} 
+                      description={item.description} 
+                      key={idx}
+                      Icon={item.name === "Cara" ? RiCoinFill : RiCoinLine} 
+                    />
+                  ))}
+                  
+                  {/* Botón para ver todos los lanzamientos */}
+                  {!showAll && lanzamientos.length > 36 && (
+                    <motion.button
+                    className="mx-auto flex items-center justify-center mt-5 mb-2 text-foreground hover:underline transition-all cursor-pointer"
+                      onClick={() => setShowAll(true)}
+                      animate={{ y: [0, -5, 0] }}
+                      transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                      Ver todos los lanzamientos ↓
+                    </motion.button>
+                  )}
+                </>
               )
           }
         </div>
