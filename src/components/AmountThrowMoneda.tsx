@@ -11,10 +11,11 @@ import confetti from "canvas-confetti";
 import { toast } from 'sonner';
 import { PasoCard } from './PasoCard';
 import { Conclusion } from './Conclusion';
+import { RiCoinFill, RiCoinLine } from "react-icons/ri";
 
 type Lanzamiento = Array<{ name: string, description: string }>
 
-export const AmountThrow = () => {
+export const AmountThrowMoneda = () => {
   const [amount, setAmount] = useState("1")
   const [error, setError] = useState("")
   const [margenError, setMargenError] = useState("")
@@ -135,7 +136,12 @@ export const AmountThrow = () => {
               )
             : (
                 lanzamientos.map((item, idx) => (
-                  <AnimatedListItem name={item.name} description={item.description} key={idx} />
+                  <AnimatedListItem 
+                    name={item.name} 
+                    description={item.description} 
+                    key={idx}
+                    Icon={item.name === "Cara" ? RiCoinFill : RiCoinLine} 
+                  />
                 ))
               )
           }
@@ -200,7 +206,7 @@ export const AmountThrow = () => {
                 Cara = ${totalLanzamientos.cara} \\\\ 
                 Sello = ${totalLanzamientos.sello}
               `}
-              text2={`Donde el margen de error ${parseFloat(margenError) <= 5 && "no"} superó el 5%. Su resultado fue del ${margenError}% de tal manera que, esto demuestra que el proyecto es ${parseFloat(margenError) <= 5 ? "válido" : "inválido"} con un margen de error ${parseFloat(margenError) <= 5 ? "bajo" : "alto"}.`}
+              text2={`Donde el margen de error ${parseFloat(margenError) <= 5 ? "no" : ""} superó el 5%. Su resultado fue del ${margenError}% de tal manera que, esto demuestra que el proyecto es ${parseFloat(margenError) <= 5 ? "válido" : "inválido"} con un margen de error ${parseFloat(margenError) <= 5 ? "bajo" : "alto"}.`}
             />
           </>
         ) 

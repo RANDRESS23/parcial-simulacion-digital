@@ -24,8 +24,8 @@ export const Navbar = ({ className }: { className?: string }) => {
             <MenuItem setActive={setActive} active={active} item="Ejercicios primer corte">
               <div className="flex flex-col space-y-4 text-sm">
                 <HoveredLink href="/ejercicio1-primer-corte">N°1 - Ejercicio de la moneda</HoveredLink>
-                <HoveredLink href="/web-dev">N°2 - Ejercicio del dado</HoveredLink>
-                <HoveredLink href="/web-dev">N°3 - Ejercicio de la moneda y el dado</HoveredLink>
+                <HoveredLink href="/ejercicio2-primer-corte">N°2 - Ejercicio del dado</HoveredLink>
+                <HoveredLink href="/ejercicio3-primer-corte">N°3 - Ejercicio de la moneda y el dado</HoveredLink>
               </div>
             </MenuItem>
           </div>

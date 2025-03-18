@@ -49,7 +49,7 @@ export const MobileMenu = () => {
                   <SheetPrimitive.Close asChild>
                     <Link
                       className="text-sm text-left font-medium transition-colors cursor-pointer hover:text-primary"
-                      href="/ejercicio1-primer-corte"
+                      href="/ejercicio2-primer-corte"
                     >
                       N°2 - Ejercicio del dado
                     </Link>
@@ -57,7 +57,7 @@ export const MobileMenu = () => {
                   <SheetPrimitive.Close asChild>
                     <Link
                       className="text-sm text-left font-medium transition-colors cursor-pointer hover:text-primary"
-                      href="/ejercicio1-primer-corte"
+                      href="/ejercicio3-primer-corte"
                     >
                       N°3 - Ejercicio de la moneda y el dado
                     </Link>

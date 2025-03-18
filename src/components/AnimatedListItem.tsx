@@ -1,15 +1,15 @@
 'use client'
 
 import { cn } from "@/lib/utils";
-import { RiCoinFill } from "react-icons/ri";
 import { motion } from 'framer-motion'
 
 interface Item {
   name: string;
   description: string;
+  Icon: any;
 }
 
-export const AnimatedListItem = ({ name, description }: Item) => {
+export const AnimatedListItem = ({ name, description, Icon }: Item) => {
   return (
     <motion.figure
       initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
@@ -27,7 +27,7 @@ export const AnimatedListItem = ({ name, description }: Item) => {
         <div
           className="flex size-8 items-center justify-center rounded-2xl bg-accent"
         >
-          <RiCoinFill />
+          <Icon />
         </div>
         <div className="flex flex-col overflow-hidden">
           <figcaption className="flex flex-row items-center whitespace-pre text-lg font-medium dark:text-white ">
