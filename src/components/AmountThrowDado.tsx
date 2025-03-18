@@ -172,7 +172,7 @@ export const AmountThrowDado = () => {
                 math={`
                   \\begin{aligned}
                     U_0 &= \\frac{${totalLanzamientos.cara1}(1) + ${totalLanzamientos.cara2}(2) + ${totalLanzamientos.cara3}(3) + ${totalLanzamientos.cara4}(4) + ${totalLanzamientos.cara5}(5) + ${totalLanzamientos.cara6}(6)}{${amount}} \\\\
-                    U_0 &= \\frac{${(totalLanzamientos.cara1 * 1) + (totalLanzamientos.cara2 * 2) + (totalLanzamientos.cara3 * 3) + (totalLanzamientos.cara4 * 4) + (totalLanzamientos.cara5 * 5) + (totalLanzamientos.cara6 * 6)}}{${amount}} \\\\
+                    U_0 &= \\frac{${(totalLanzamientos.cara1 * 1) + (totalLanzamientos.cara2 * 2) + (totalLanzamientos.cara3 * 3) + (totalLanzamientos.cara4 * 4) + (totalLanzamientos.cara5 * 5) + (totalLanzamientos.cara6 * 6)}}{${amount}} \\\\ \\phantom{} \\\\
                     U_0 &= ${(((totalLanzamientos.cara1 * 1) + (totalLanzamientos.cara2 * 2) + (totalLanzamientos.cara3 * 3) + (totalLanzamientos.cara4 * 4) + (totalLanzamientos.cara5 * 5) + (totalLanzamientos.cara6 * 6)) / Number(amount)).toFixed(2)}
                   \\end{aligned}
                 `}

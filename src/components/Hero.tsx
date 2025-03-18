@@ -1,6 +1,6 @@
 import { FaLocationArrow } from "react-icons/fa6"
 import { RetroGrid } from "./magicui/retro-grid"
-import Link from "next/link"
+import { Link } from "next-view-transitions"
 import { ShimmerButtonHero } from "./ShimmerButtonHero"
 
 export const Hero = () => {
@@ -13,7 +13,10 @@ export const Hero = () => {
             <h1 className="text-5xl font-extrabold tracking-tight text-balance sm:text-7xl font-orbitron leading-14 md:leading-20">
               Parcial Primer Corte
             </h1>
-            <p className="mt-7 font-medium text-pretty text-neutral-700 dark:text-neutral-400 sm:text-xl/8 flex flex-col items-center">
+            <p className="mt-3 font-medium text-pretty text-neutral-900 dark:text-neutral-300 sm:text-xl/8 flex flex-col items-center">
+              <span className="text-base md:text-lg italic">Jhonatan Barragán García</span>
+            </p>
+            <p className="mt-5 font-medium text-pretty text-neutral-700 dark:text-neutral-400 sm:text-xl/8 flex flex-col items-center">
               <span className="text-sm md:text-base italic">▶ Raúl Andrés Quimbaya Puentes</span>
               <span className="text-sm md:text-base italic">▶ Daniel Santiago Ramírez Aldana</span>
               <span className="text-sm md:text-base italic">▶ Juan David Rodríguez Calderón</span>
