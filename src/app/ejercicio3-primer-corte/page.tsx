@@ -20,7 +20,7 @@ export default function Ejercicio3 () {
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mt-6 font-orbitron">
                 Ejercicio N°3 - Ejercicio de la moneda y el dado
               </h2>
-              <p className="text-base md:text-lg text-center mt-6 text-gray-600 dark:text-gray-400 italic w-[45ch]">
+              <p className="text-base md:text-lg text-center mt-6 text-gray-600 dark:text-gray-400 italic lg:w-[45ch]">
                 Aqui podras encontrar los pasos para resolver el ejercicio de la moneda y el dado
               </p>
             </div>
